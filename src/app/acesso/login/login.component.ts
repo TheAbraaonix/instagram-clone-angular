@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-login',
@@ -8,5 +8,11 @@ import { Component } from '@angular/core';
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
+  @Output() public exibirPainel: EventEmitter<string> = new EventEmitter<string>();
+  
+  constructor() { }
 
+  public exibirPainelCadastro(): void {
+    this.exibirPainel.emit('cadastro');
+  }
 }

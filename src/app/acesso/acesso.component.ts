@@ -2,11 +2,13 @@ import { Component } from '@angular/core';
 import { BannerComponent } from "./banner/banner.component";
 import { LoginComponent } from "./login/login.component";
 import { animate, state, style, transition, trigger } from '@angular/animations';
+import { CadastroComponent } from "./cadastro/cadastro.component";
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-acesso',
   standalone: true,
-  imports: [BannerComponent, LoginComponent],
+  imports: [BannerComponent, LoginComponent, CadastroComponent, NgIf],
   templateUrl: './acesso.component.html',
   styleUrl: './acesso.component.css',
   animations: [
@@ -32,4 +34,9 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 export class AcessoComponent {
   public estadoBanner: string = 'criado';
   public estadoPainel: string = 'criado';
+  public cadastro: boolean = false;
+
+  exibirPainel(event: string): void {
+    this.cadastro = event === 'cadastro' ? true : false;
+  }
 }
