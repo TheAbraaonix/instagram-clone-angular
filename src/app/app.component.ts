@@ -3,12 +3,13 @@ import { RouterOutlet } from '@angular/router';
 import { AcessoComponent } from "./acesso/acesso.component";
 import { Autenticacao } from './services/autenticacao.service';
 import * as firebase from 'firebase';
+import { AutenticacaoGuard } from './services/autenticacao-guard.service';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [RouterOutlet, AcessoComponent],
-  providers: [Autenticacao],
+  providers: [Autenticacao, AutenticacaoGuard],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
