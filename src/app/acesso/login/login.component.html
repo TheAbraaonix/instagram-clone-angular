@@ -19,11 +19,11 @@
           formControlName="senha"
         >
       </div>
-      <button type="submit" class="btn btn-primary btn-sm w-100">Entrar</button>
+      <button [disabled]="!formulario.valid" type="submit" class="btn btn-primary btn-sm w-100">Entrar</button>
     </form>
     <hr />
 
-    <p class="small text-danger text-center">O nome de usuário inserido não pertence a uma conta. Verifique seu nome de usuário e tente novamente.</p>
+    <p class="small text-danger text-center">{{msgErroLogin}}</p>
 
   </div>
 </div>

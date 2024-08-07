@@ -26,8 +26,8 @@ export class Autenticacao {
             });
     }
 
-    public autenticar(email: string, senha: string): void {
-        firebase.auth().signInWithEmailAndPassword(email, senha)
+    public autenticar(email: string, senha: string): Promise<any> {
+        return firebase.auth().signInWithEmailAndPassword(email, senha)
             .then((resposta: any) => {
                 firebase.auth().currentUser?.getIdToken()
                     .then((idToken: string) => { 
@@ -36,9 +36,11 @@ export class Autenticacao {
                         this.router.navigate(['/home']);
                     });
             })
-            .catch((error: any) => {
-                console.log(error);
+            .catch((error: string) => {
                 this.token_id = "";
+                let errorMessage = "Ocorreu um erro ao tentar autenticar o usuário. Por favor, tente novamente.";
+
+                return Promise.reject(errorMessage);
             });
     }
 
