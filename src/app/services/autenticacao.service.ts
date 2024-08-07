@@ -22,7 +22,6 @@ export class Autenticacao {
                     .set(usuario);
             })
             .catch((erro: any) => {
-                console.log(erro.code);
                 let errorMessage = "Ocorreu um erro ao tentar cadastrar o usuário. Por favor, tente novamente.";
 
                 if (erro.code === "auth/email-already-in-use") {
@@ -43,9 +42,17 @@ export class Autenticacao {
                         this.router.navigate(['/home']);
                     });
             })
-            .catch((error: string) => {
+            .catch((error: any) => {
                 this.token_id = "";
                 let errorMessage = "Ocorreu um erro ao tentar autenticar o usuário. Por favor, tente novamente.";
+
+                if (error.code === "auth/user-not-found") {
+                    errorMessage = "O usuário informado não foi encontrado.";
+                }
+
+                if (error.code === "auth/wrong-password") {
+                    errorMessage = "A senha informada é inválida.";
+                }
 
                 return Promise.reject(errorMessage);
             });
