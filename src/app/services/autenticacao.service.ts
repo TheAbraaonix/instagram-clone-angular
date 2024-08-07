@@ -21,8 +21,15 @@ export class Autenticacao {
                 firebase.database().ref(`usuario_detalhe/${btoa(usuario.email)}`)
                     .set(usuario);
             })
-            .catch((erro: Error) => {
-                console.log(erro);
+            .catch((erro: any) => {
+                console.log(erro.code);
+                let errorMessage = "Ocorreu um erro ao tentar cadastrar o usuário. Por favor, tente novamente.";
+
+                if (erro.code === "auth/email-already-in-use") {
+                    errorMessage = "O e-mail informado já está em uso.";
+                }
+                
+                return Promise.reject(errorMessage);
             });
     }
 
