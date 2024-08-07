@@ -9,7 +9,6 @@ export class AutenticacaoGuard implements CanActivate {
     constructor(private autenticacao: Autenticacao) {}
     
     canActivate(): boolean {
-        console.log(this.autenticacao.autenticado());
         return this.autenticacao.autenticado();
     }
 }
