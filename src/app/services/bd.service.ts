@@ -31,4 +31,36 @@ export class BdService {
                     );
             });
     }
+
+    public consultaPublicacoes(emailUsuario: string): Promise<any> {
+        return new Promise((resolve, reject) => {
+            firebase.database().ref(`publicacoes/${btoa(emailUsuario)}`)
+                .once('value')
+                .then((snapshot: any) => {
+                    let publicacoes: Array<any> = [];
+
+                    snapshot.forEach((childSnapshot: any) => {
+                        let publicacao = childSnapshot.val();
+                        
+                        firebase.storage().ref()
+                            .child(`imagens/${childSnapshot.key}`)
+                            .getDownloadURL()
+                            .then((url: string) => {
+                                publicacao.urlImagem = url;
+
+                                firebase.database().ref(`usuario_detalhe/${btoa(emailUsuario)}`)
+                                    .once('value')
+                                    .then((snapshot: any) => {
+                                        publicacao.nomeUsuario = snapshot.val().nome_usuario;
+                                    });
+                                
+                                publicacoes.push(publicacao);
+                            });
+                    });
+
+                    resolve(publicacoes.reverse());
+                });
+
+        });
+    }
 }

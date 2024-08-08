@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { BdService } from '../../services/bd.service';
 import { ProgressoService } from '../../services/progresso.service';
 import * as firebase from 'firebase';
+import * as bootstrap from 'bootstrap';
 import { interval, Subject, takeUntil } from 'rxjs';
 import { NgIf } from '@angular/common';
 
@@ -18,6 +19,7 @@ export class IncluirPublicacaoComponent implements OnInit {
   private imagem: any;
   public progressoPublicacao: string = "pendente";
   public porcentagemUpload: number = 0;
+  @Output() public atualizarTimeLine: EventEmitter<any> = new EventEmitter<any>();
   
   constructor(
     private bdService: BdService,
@@ -54,12 +56,20 @@ export class IncluirPublicacaoComponent implements OnInit {
       
       if (this.progressoService.status === "concluido") {
         this.progressoPublicacao = "concluido";
+        this.atualizarTimeLine.emit();
         continua.next(false);
+        this.resetarModal();
       }
     });
   }
 
   public preparaImagemUpload(event: Event): void {
     this.imagem = (<HTMLInputElement>event.target).files;
+  }
+
+  public resetarModal(): void {
+    this.progressoPublicacao = "pendente";
+    this.porcentagemUpload = 0;
+    this.formulario.reset();
   }
 }

@@ -3,8 +3,8 @@
         <div class="modal-content" *ngIf="progressoPublicacao === 'pendente'">
             <form [formGroup]="formulario" (ngSubmit)="publicar()">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Criar uma publicação</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <h1 class="modal-title fs-5" id="criacaoModal">Criar uma publicação</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="resetarModal()"></button>
                 </div>
                 <div class="modal-body">
                     <input type="file" class="form-control mb-3" accept="image/*"
@@ -20,8 +20,7 @@
 
         <div class="modal-content" *ngIf="progressoPublicacao === 'andamento'">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Publicação em andamento</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h1 class="modal-title fs-5" id="progressoModal">Publicação em andamento</h1>
             </div>
             <div class="modal-body">
                 <div class="progress" role="progressbar" aria-label="Example with label" [attr.aria-valuenow]="porcentagemUpload" aria-valuemin="0" aria-valuemax="100">
@@ -32,8 +31,8 @@
 
         <div class="modal-content" *ngIf="progressoPublicacao === 'concluido'">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Publicação realizada com sucesso</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h1 class="modal-title fs-5" id="conclusaoModal">Publicação realizada com sucesso</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="resetarModal()"></button>
             </div>
             <div class="modal-body">
                 Sua publicação foi realizada com sucesso!
