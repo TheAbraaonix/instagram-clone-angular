@@ -24,7 +24,9 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                Progresso: {{ porcentagemUpload }}%
+                <div class="progress" role="progressbar" aria-label="Example with label" [attr.aria-valuenow]="porcentagemUpload" aria-valuemin="0" aria-valuemax="100">
+                    <div class="progress-bar bg-success" [style.width.%]="porcentagemUpload">{{porcentagemUpload}}%</div>
+                </div>
             </div>
         </div>
 
