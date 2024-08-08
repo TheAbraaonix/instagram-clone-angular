@@ -4,12 +4,14 @@ import { AcessoComponent } from "./acesso/acesso.component";
 import { Autenticacao } from './services/autenticacao.service';
 import * as firebase from 'firebase';
 import { AutenticacaoGuard } from './services/autenticacao-guard.service';
+import { BdService } from './services/bd.service';
+import { ProgressoService } from './services/progresso.service';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [RouterOutlet, AcessoComponent],
-  providers: [Autenticacao, AutenticacaoGuard],
+  providers: [Autenticacao, AutenticacaoGuard, BdService, ProgressoService],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
